@@ -2,6 +2,7 @@ package com.example.springbootmongo;
 
 import com.example.springbootmongo.config.MongoConfiguration;
 import com.example.springbootmongo.config.SwaggerConfiguration;
+import com.example.springbootmongo.dto.TopSaleDTO;
 import com.example.springbootmongo.model.Sale;
 import com.example.springbootmongo.repository.SaleRepository;
 import com.example.springbootmongo.template.SaleTemplate;
@@ -12,6 +13,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class Application {
@@ -41,7 +43,8 @@ public class Application {
                     Sale.builder().description(SaleTemplate.SALE_003).total(RandomUtil.bigDecimalRandom()).build()
             ).forEach(repository::save);
 			repository.findAll().forEach(System.out::println);
-		});
+            repository.topSale().forEach(System.out::println);
+        });
 	}
 
 }
