@@ -1,0 +1,16 @@
+#mongodb
+spring:
+  application:
+    name: springboot-mongo
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test
+
+info:
+  name: @project.name@
+  description: @project.description@
+  version: @project.version@
+
+
