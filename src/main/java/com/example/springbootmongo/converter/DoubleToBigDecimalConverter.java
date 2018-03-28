@@ -1,4 +1,4 @@
-package com.example.springbootmongo.config;
+package com.example.springbootmongo.converter;
 
 import org.springframework.core.convert.converter.Converter;
 

@@ -4,6 +4,7 @@ import com.example.springbootmongo.config.MongoConfiguration;
 import com.example.springbootmongo.config.SwaggerConfiguration;
 import com.example.springbootmongo.model.Sale;
 import com.example.springbootmongo.repository.SaleRepository;
+import com.example.springbootmongo.util.RandomUtil;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,11 +32,11 @@ public class Application {
 		return (args -> {
 			repository.deleteAll();
 			Arrays.asList(
-					Sale.builder().description(UUID.randomUUID().toString()).total(new BigDecimal(10.5)).build(),
-					Sale.builder().description(UUID.randomUUID().toString()).total(new BigDecimal(20.1)).build(),
-					Sale.builder().description(UUID.randomUUID().toString()).total(new BigDecimal(30.2)).build(),
-					Sale.builder().description(UUID.randomUUID().toString()).total(new BigDecimal(40.4)).build(),
-					Sale.builder().description(UUID.randomUUID().toString()).total(new BigDecimal(50.5)).build()
+					Sale.builder().description(UUID.randomUUID().toString()).total(RandomUtil.bigDecimalRandom()).build(),
+					Sale.builder().description(UUID.randomUUID().toString()).total(RandomUtil.bigDecimalRandom()).build(),
+					Sale.builder().description(UUID.randomUUID().toString()).total(RandomUtil.bigDecimalRandom()).build(),
+					Sale.builder().description(UUID.randomUUID().toString()).total(RandomUtil.bigDecimalRandom()).build(),
+					Sale.builder().description(UUID.randomUUID().toString()).total(RandomUtil.bigDecimalRandom()).build()
 			).forEach(repository::save);
 			repository.findAll().forEach(System.out::println);
 		});
