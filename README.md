@@ -61,18 +61,21 @@ public class DoubleToBigDecimalConverter implements Converter<Double, BigDecimal
 ```java
 package com.example.springbootmongo.config;
 
-import com.mongodb.Mongo;
+import com.example.springbootmongo.converter.BigDecimalToDoubleConverter;
+import com.example.springbootmongo.converter.DoubleToBigDecimalConverter;
 import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
+import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
 import java.util.Arrays;
 
 @Configuration
+@EnableMongoAuditing
 public class MongoConfiguration {
 
     //MongoDB properties read from the application.yaml configuration file (to handle different profiles)
@@ -99,7 +102,7 @@ public class MongoConfiguration {
      *
      **/
     @Bean
-    public Mongo mongo() throws Exception {
+    public MongoClient mongo() throws Exception {
         return new MongoClient(mongoHost, mongoPort);
     }
 
@@ -108,8 +111,13 @@ public class MongoConfiguration {
      * Returns the list of custom converters that will be used by the MongoDB template
      *
      **/
-    public CustomConversions customConversions() {
-        return new CustomConversions(Arrays.asList(new DoubleToBigDecimalConverter(), new BigDecimalToDoubleConverter()));
+    public MongoCustomConversions customConversions() {
+        return new MongoCustomConversions(
+                Arrays.asList(
+                        new DoubleToBigDecimalConverter(),
+                        new BigDecimalToDoubleConverter()
+                )
+        );
     }
 
 }
