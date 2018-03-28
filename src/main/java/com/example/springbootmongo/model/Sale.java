@@ -23,7 +23,6 @@ public class Sale {
     @CreatedDate
     private LocalDateTime createDate;
     private String description;
-//    private Double total;
     private BigDecimal total;
 
 }
